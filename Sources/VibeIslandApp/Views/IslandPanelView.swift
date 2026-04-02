@@ -290,8 +290,8 @@ struct IslandPanelView: View {
     private var surfaceFill: some ShapeStyle {
         LinearGradient(
             colors: [
-                Color.white.opacity(isOpened ? 0.085 : 0.03),
-                Color.black.opacity(0.98),
+                Color(red: 0.12, green: 0.12, blue: 0.13),
+                Color(red: 0.03, green: 0.03, blue: 0.04),
             ],
             startPoint: .top,
             endPoint: .bottom
@@ -320,7 +320,7 @@ private struct IslandSessionRow: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Button(action: onSelect) {
+            Button(action: handlePrimaryTap) {
                 HStack(spacing: 10) {
                     Circle()
                         .fill(statusColor)
@@ -372,11 +372,11 @@ private struct IslandSessionRow: View {
         .padding(.vertical, isSelected ? 14 : 12)
         .background(
             RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .fill(isSelected ? Color.white.opacity(0.11) : Color.white.opacity(0.015))
+                .fill(isSelected ? Color(red: 0.13, green: 0.13, blue: 0.14) : Color(red: 0.05, green: 0.05, blue: 0.06))
         )
         .overlay(
             RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .strokeBorder(isSelected ? .white.opacity(0.09) : .white.opacity(0.03))
+                .strokeBorder(isSelected ? .white.opacity(0.08) : .white.opacity(0.025))
         )
         .overlay(
             Rectangle()
@@ -413,18 +413,27 @@ private struct IslandSessionRow: View {
                         .buttonStyle(IslandCompactButtonStyle(tint: .secondary))
                 }
             }
-        } else {
+        } else if let secondaryText = session.spotlightSecondaryText {
             HStack {
-                if let tool = session.spotlightCurrentToolLabel {
-                    Text("Running \(tool)")
-                        .font(.system(size: 10))
-                        .foregroundStyle(.white.opacity(0.4))
-                }
+                Text(secondaryText)
+                    .font(.system(size: 10.5, weight: .medium))
+                    .foregroundStyle(.white.opacity(0.38))
+                    .lineLimit(1)
                 Spacer(minLength: 8)
-                Button("Jump") { onJump() }
-                    .buttonStyle(IslandCompactButtonStyle(tint: .mint))
-                    .disabled(session.jumpTarget == nil)
             }
+        }
+    }
+
+    private func handlePrimaryTap() {
+        if session.permissionRequest != nil || session.questionPrompt != nil {
+            onSelect()
+            return
+        }
+
+        if session.jumpTarget != nil {
+            onJump()
+        } else {
+            onSelect()
         }
     }
 
@@ -434,7 +443,7 @@ private struct IslandSessionRow: View {
             .foregroundStyle(.white.opacity(0.56))
             .padding(.horizontal, 7)
             .padding(.vertical, 3.5)
-            .background(.white.opacity(0.055), in: Capsule())
+            .background(Color(red: 0.14, green: 0.14, blue: 0.15), in: Capsule())
     }
 
     private var statusColor: Color {
@@ -517,7 +526,7 @@ private struct ClosedCountBadge: View {
             .foregroundStyle(tint)
             .padding(.horizontal, 8)
             .padding(.vertical, 2)
-            .background(.white.opacity(0.05), in: Capsule())
+            .background(Color(red: 0.14, green: 0.14, blue: 0.15), in: Capsule())
     }
 }
 
