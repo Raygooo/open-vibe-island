@@ -25,7 +25,9 @@
 "settings.general.autoCollapse" = "Auto-collapse on mouse exit";
 "settings.general.showDockIcon" = "Show icon in Dock";
 "settings.general.hapticFeedback" = "Haptic feedback on hover";
+"settings.general.suppressFrontmostNotifications" = "Suppress notifications for focused sessions";
 "settings.general.showCodexUsage" = "Show Codex usage";
+"settings.general.completionReply" = "Reply from completion card";
 "settings.general.cliHooks" = "CLI Hooks";
 "settings.general.activated" = "Activated";
 "settings.general.install" = "Install";
@@ -149,6 +151,7 @@
 
 /* Island Panel - Completion */
 "completion.done" = "Done";
+"completion.replyPlaceholder" = "Reply to Claude…";
 
 /* Menu Bar */
 "menu.status" = "%lld live · %lld attention";

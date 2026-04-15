@@ -211,6 +211,14 @@ struct GeneralSettingsPane: View {
                     get: { model.hapticFeedbackEnabled },
                     set: { model.hapticFeedbackEnabled = $0 }
                 ))
+                Toggle(lang.t("settings.general.completionReply"), isOn: Binding(
+                    get: { model.completionReplyEnabled },
+                    set: { model.completionReplyEnabled = $0 }
+                ))
+                Toggle(lang.t("settings.general.suppressFrontmostNotifications"), isOn: Binding(
+                    get: { model.suppressFrontmostNotifications },
+                    set: { model.suppressFrontmostNotifications = $0 }
+                ))
             }
 
         }
